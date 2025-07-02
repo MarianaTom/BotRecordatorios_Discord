@@ -18,19 +18,19 @@ scheduler = AsyncIOScheduler(timezone="America/Mexico_City")
 async def on_ready():
     print(f'Bot conectado como {bot.user}')
     # Recordatorio jueves 2:00 PM
-    scheduler.add_job(send_reminder, CronTrigger(day_of_week='tue', hour=23, minute=21))
+    scheduler.add_job(send_reminder, CronTrigger(day_of_week='tue', hour=23, minute=30))
     # Aviso jueves 2:59 PM
-    scheduler.add_job(send_last_call, CronTrigger(day_of_week='tue', hour=23, minute=22))
+    scheduler.add_job(send_last_call, CronTrigger(day_of_week='tue', hour=23, minute=31))
     scheduler.start()
 
 async def send_reminder():
-    channel = bot.get_channel(CHANNEL_ID)  # Reemplaza con tu ID de canal
+    channel = bot.get_channel(1389709699301118095)
     if channel:
         with open("recordatorios/recordatorio1.txt", "r", encoding="utf-8") as f:
             await channel.send(f.read())
 
 async def send_last_call():
-    channel = bot.get_channel(CHANNEL_ID)  # Reemplaza con tu ID de canal
+    channel = bot.get_channel(1389837483327488011) 
     if channel:
         with open("recordatorios/recordatorio2.txt", "r", encoding="utf-8") as f:
             await channel.send(f.read())
