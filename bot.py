@@ -23,10 +23,10 @@ async def on_ready():
     print(f'Bot conectado como {bot.user}')
 
     # Tareas programadas (Jueves)
-    scheduler.add_job(send_reminder, CronTrigger(day_of_week='thu', hour=9, minute=0))
-    scheduler.add_job(send_last_call, CronTrigger(day_of_week='thu', hour=16, minute=0))
-    scheduler.add_job(send_junta_reminder, CronTrigger(day_of_week='thu', hour=12, minute=0))
-    scheduler.add_job(send_asistencia_link, CronTrigger(day_of_week='thu', hour=12, minute=1))
+    scheduler.add_job(send_reminder, CronTrigger(day_of_week='wed', hour=16, minute=6))
+    scheduler.add_job(send_last_call, CronTrigger(day_of_week='wed', hour=16, minute=6))
+    scheduler.add_job(send_junta_reminder, CronTrigger(day_of_week='wed', hour=16, minute=6))
+    scheduler.add_job(send_asistencia_link, CronTrigger(day_of_week='wed', hour=16, minute=6))
 
     scheduler.start()
 
