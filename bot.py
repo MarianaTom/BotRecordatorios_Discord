@@ -24,8 +24,9 @@ async def on_ready():
 
     # Jobs programados - ejemplo: todos los miércoles a las 16:06
     scheduler.add_job(send_reminder, CronTrigger(day_of_week='wed', hour=16, minute=6))
-    # Puedes agregar más jobs aquí, ejemplo:
-    # scheduler.add_job(send_last_call, CronTrigger(day_of_week='thu', hour=16, minute=0))
+    scheduler.add_job(send_last_call, CronTrigger(day_of_week='thu', hour=16, minute=0))
+    scheduler.add_job(send_junta_reminder, CronTrigger(day_of_week='thu', hour=12, minute=0))
+    scheduler.add_job(send_asistencia_link, CronTrigger(day_of_week='thu', hour=12, minute=1))
 
     scheduler.start()
 
@@ -33,33 +34,25 @@ async def send_reminder():
     channel = bot.get_channel(CHANNEL_ID_ASISTENCIA)
     if channel:
         with open("recordatorios/recordatorio1.txt", "r", encoding="utf-8") as f:
-            await channel.send(f"📌 **Recordatorio 1:**\n{f.read()}")
-    else:
-        print("No se encontró el canal de asistencia para el recordatorio 1")
+            await channel.send(f.read())
 
 async def send_last_call():
     channel = bot.get_channel(CHANNEL_ID_ASISTENCIA)
     if channel:
         with open("recordatorios/recordatorio2.txt", "r", encoding="utf-8") as f:
-            await channel.send(f"📌 **Recordatorio 2:**\n{f.read()}")
-    else:
-        print("No se encontró el canal de asistencia para el recordatorio 2")
+            await channel.send(f.read())
 
 async def send_junta_reminder():
     channel = bot.get_channel(CHANNEL_ID_UPDATE)
     if channel:
         with open("recordatorios/recordatorio3.txt", "r", encoding="utf-8") as f:
-            await channel.send(f"📌 **Recordatorio 3:**\n{f.read()}")
-    else:
-        print("No se encontró el canal de actualizaciones para el recordatorio 3")
+            await channel.send(f.read())
 
 async def send_asistencia_link():
     channel = bot.get_channel(CHANNEL_ID_UPDATE)
     if channel:
         with open("recordatorios/recordatorio4.txt", "r", encoding="utf-8") as f:
-            await channel.send(f"📌 **Recordatorio 4:**\n{f.read()}")
-    else:
-        print("No se encontró el canal de actualizaciones para el recordatorio 4")
+            await channel.send(f.read())
 
 @bot.command()
 async def testbot(ctx):
@@ -74,32 +67,32 @@ async def preview(ctx):
 
 @bot.command()
 async def pruebaenvio(ctx):
-    """Envía todos los recordatorios a sus canales configurados para prueba"""
+    """Envía todos los recordatorios a sus canales configurados sin encabezados"""
     # Recordatorio 1
     channel1 = bot.get_channel(CHANNEL_ID_ASISTENCIA)
     if channel1:
         with open("recordatorios/recordatorio1.txt", "r", encoding="utf-8") as f:
-            await channel1.send(f"📌 **Recordatorio 1 (Prueba):**\n{f.read()}")
+            await channel1.send(f.read())
     else:
         await ctx.send("No encontré el canal de asistencia para el recordatorio 1.")
 
     # Recordatorio 2
     if channel1:
         with open("recordatorios/recordatorio2.txt", "r", encoding="utf-8") as f:
-            await channel1.send(f"📌 **Recordatorio 2 (Prueba):**\n{f.read()}")
+            await channel1.send(f.read())
 
     # Recordatorio 3
     channel2 = bot.get_channel(CHANNEL_ID_UPDATE)
     if channel2:
         with open("recordatorios/recordatorio3.txt", "r", encoding="utf-8") as f:
-            await channel2.send(f"📌 **Recordatorio 3 (Prueba):**\n{f.read()}")
+            await channel2.send(f.read())
     else:
         await ctx.send("No encontré el canal de actualizaciones para el recordatorio 3.")
 
     # Recordatorio 4
     if channel2:
         with open("recordatorios/recordatorio4.txt", "r", encoding="utf-8") as f:
-            await channel2.send(f"📌 **Recordatorio 4 (Prueba):**\n{f.read()}")
+            await channel2.send(f.read())
 
     await ctx.send("Prueba de envíos completada.")
 
