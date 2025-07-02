@@ -18,9 +18,9 @@ scheduler = AsyncIOScheduler(timezone="America/Mexico_City")
 async def on_ready():
     print(f'Bot conectado como {bot.user}')
     # Recordatorio jueves 2:00 PM
-    scheduler.add_job(send_reminder, CronTrigger(day_of_week='thu', hour=14, minute=0))
+    scheduler.add_job(send_reminder, CronTrigger(day_of_week='tue', hour=23, minute=14))
     # Aviso jueves 2:59 PM
-    scheduler.add_job(send_last_call, CronTrigger(day_of_week='thu', hour=14, minute=59))
+    scheduler.add_job(send_last_call, CronTrigger(day_of_week='tue', hour=23, minute=15))
     scheduler.start()
 
 async def send_reminder():
