@@ -39,4 +39,13 @@ async def send_last_call():
 async def testbot(ctx):
     await ctx.send("¡Bot activo y funcionando!")
 
+@bot.command()
+async def preview(ctx):
+    """Envía ambos recordatorios manualmente como ejemplo."""
+    with open("recordatorios/recordatorio1.txt", "r", encoding="utf-8") as f1:
+        await ctx.send(f"📌 **Preview Recordatorio 1:**\n{f1.read()}")
+
+    with open("recordatorios/recordatorio2.txt", "r", encoding="utf-8") as f2:
+        await ctx.send(f"📌 **Preview Recordatorio 2:**\n{f2.read()}")
+
 bot.run(TOKEN)
